@@ -1,0 +1,163 @@
+Instructions:
+- You are a player participating in a Simulated Stock Trading Challenge where the prices of stocks are determined mainly by the bids made by the participants in the challenge.
+- The Simulated Stock Trading Challenge would last several days, and there are several iterations each day.
+- You need to evaluate the weakness and strength of your the latest investment strategy.
+- You will be given the specific operations for stocks, stock information, market information, investment strategy, and portfolio status of each iteration to help you evaluate. The information is in the next. 
+- You overall objective is to make as much profit as possible.
+
+
+Time:
+- Day: 0
+- Iteration: 0
+
+Stock operation in this iteration: buy 45 shares of stock A at $445.6
+
+Facts in this iteration:
+- Financial Situation:
+    Your total portfolio balance is $0.00, you do not hold any stock right now.
+- The stocks that avaliable in the market were:
+    - market index change: Current market index change: 0.00%
+    
+    - A:
+        - The closing prices in the past 5 days are: [437.53, 439.4, 441.2, 437.8, 445.6]
+        - Dividend per share: $22
+        - Current price change: +0.00%, Current price: $445.6
+        - Intraday High£º$445.6
+        - Intraday Low: $445.6
+        - Intraday Mean: $445.6
+
+    - B:
+        - The closing prices in the past 5 days are: [453.11, 468.12, 470.3, 460.75, 465.8]
+        - Dividend per share: $23
+        - Current price change: +0.00%, Current price: $465.8
+        - Intraday High£º$465.8
+        - Intraday Low: $465.8
+        - Intraday Mean: $465.8
+
+    - C:
+        - The closing prices in the past 5 days are: [498.31, 470.1, 465.25, 455.9, 440.6]
+        - Dividend per share: $25
+        - Current price change: +0.00%, Current price: $440.6
+        - Intraday High£º$440.6
+        - Intraday Low: $440.6
+        - Intraday Mean: $440.6
+
+
+Gossip from other people:
+- None
+- None
+
+
+Investment strategy in this iteration: try to maximize profit.
+
+--------------------------------------------------------------
+Time:
+- Day: 0
+- Iteration: 1
+
+Stock operation in this iteration: buy 23 shares of stock A at $449.5
+
+Facts in this iteration:
+- Financial Situation:
+    Your total portfolio balance is $20468.25, you are holding the following stocks:
+        - A:
+            - You have held 45 shares of this stock
+            - the total portfolio value is $20468.25 the total capital gain is 0.00% LOSS
+            - The prices in the past 5 days are: prices: [455.79, 455.79, 439.4, 441.2, 437.8]
+            - current price change: +2.29%, current price: $455.79, cost price: $454.85
+
+- The stocks that avaliable in the market were:
+    - market index change: Current market index change: 1.71%
+    
+    - A:
+        - The closing prices in the past 5 days are: [437.53, 439.4, 441.2, 437.8, 455.79]
+        - Dividend per share: $22
+        - Current price change: +2.29%, Current price: $455.79
+        - Intraday High£º$455.79
+        - Intraday Low: $445.6
+        - Intraday Mean: $451.24
+
+    - B:
+        - The closing prices in the past 5 days are: [453.11, 468.12, 470.3, 460.75, 470.43]
+        - Dividend per share: $23
+        - Current price change: +0.99%, Current price: $470.43
+        - Intraday High£º$470.43
+        - Intraday Low: $465.8
+        - Intraday Mean: $467.34
+
+    - C:
+        - The closing prices in the past 5 days are: [498.31, 470.1, 465.25, 455.9, 448.4]
+        - Dividend per share: $25
+        - Current price change: +1.77%, Current price: $448.4
+        - Intraday High£º$448.4
+        - Intraday Low: $440.6
+        - Intraday Mean: $444.6
+
+
+Gossip from other people:
+None
+
+Investment strategy in this iteration: try to maximize profit.
+
+--------------------------------------------------------------
+Time:
+- Day: 0
+- Iteration: 2
+
+Stock operation in this iteration: buy 12 shares of stock A at $454.15
+
+Facts in this iteration:
+- Financial Situation:
+    Your total portfolio balance is $31005.96, you are holding the following stocks:
+        - A:
+            - You have held 68 shares of this stock
+            - the total portfolio value is $31005.96 the total capital gain is 0.00% LOSS
+            - The prices in the past 5 days are: prices: [458.15, 458.15, 439.4, 441.2, 437.8]
+            - current price change: +2.82%, current price: $458.15, cost price: $455.97
+
+- The stocks that avaliable in the market were:
+    - market index change: Current market index change: 2.02%
+    
+    - A:
+        - The closing prices in the past 5 days are: [437.53, 439.4, 441.2, 437.8, 458.15]
+        - Dividend per share: $22
+        - Current price change: +2.82%, Current price: $458.15
+        - Intraday High£º$458.15
+        - Intraday Low: $445.6
+        - Intraday Mean: $454.15
+
+    - B:
+        - The closing prices in the past 5 days are: [453.11, 468.12, 470.3, 460.75, 468.25]
+        - Dividend per share: $23
+        - Current price change: +0.53%, Current price: $468.25
+        - Intraday High£º$470.43
+        - Intraday Low: $465.8
+        - Intraday Mean: $468.51
+
+    - C:
+        - The closing prices in the past 5 days are: [498.31, 470.1, 465.25, 455.9, 451.4]
+        - Dividend per share: $25
+        - Current price change: +2.45%, Current price: $451.4
+        - Intraday High£º$451.4
+        - Intraday Low: $440.6
+        - Intraday Mean: $446.54
+
+
+Gossip from other people:
+- None
+- None
+- None
+
+
+Investment strategy in this iteration: Continuously monitor stock operations, adjust positions based on financial situation, market index fluctuations, and optimize portfolio diversification to maximize return on investment.
+
+--------------------------------------------------------------
+
+Task: 
+- Only based on the following information of each iteration, you need to evaluate and draw conclusions regarding the weakness and strength of the latest investment strategy. You can refer to all the historical data to help with the current analysis. All evaluations of the latest investment strategy must show the specific crossponding evidences obtained from your investment return or loss:
+    - Stock operations
+    - You financial situation 
+    - The market index 
+    - The status of all available stocks
+    - The status of all holding stocks
+    - You investment strategy

@@ -1,0 +1,157 @@
+Instructions:
+- You are a player participating in a Simulated Stock Trading Challenge where the prices of stocks are determined mainly by the bids made by the participants in the challenge.
+- The Simulated Stock Trading Challenge would last several days, and there are several iterations each day.
+- You will be given some related information about you from the previous day to help you generate gossip. The information is in the next. 
+- You overall objective is to make as much profit as possible.
+
+
+Time:
+- Day: 0
+- Iteration: 0
+
+Stock operation in this iteration: buy 86 shares of stock A at $445.6
+
+Facts in this iteration:
+- Financial Situation:
+    Your total portfolio balance is $0.00, you do not hold any stock right now.
+- The stocks that avaliable in the market were:
+    
+    - A:
+        - The closing prices in the past 5 days are: [437.53, 439.4, 441.2, 437.8, 445.6]
+        - Dividend per share: $22
+        - Current price change: +0.00%, Current price: $445.6
+        - Intraday High£º$445.6
+        - Intraday Low: $445.6
+        - Intraday Mean: $445.6
+
+    - B:
+        - The closing prices in the past 5 days are: [453.11, 468.12, 470.3, 460.75, 465.8]
+        - Dividend per share: $23
+        - Current price change: +0.00%, Current price: $465.8
+        - Intraday High£º$465.8
+        - Intraday Low: $465.8
+        - Intraday Mean: $465.8
+
+    - C:
+        - The closing prices in the past 5 days are: [498.31, 470.1, 465.25, 455.9, 440.6]
+        - Dividend per share: $25
+        - Current price change: +0.00%, Current price: $440.6
+        - Intraday High£º$440.6
+        - Intraday Low: $440.6
+        - Intraday Mean: $440.6
+
+
+Analysis for stocks:
+- Stock A has consistently shown an increasing trend in closing prices over the past 5 days, indicating a potential opportunity for growth. This aligns with the investment strategy of maximizing profit by identifying stocks with positive momentum.
+- Stock B has experienced some volatility in closing prices over the past 5 days, with both increases and decreases. However, the overall trend is positive, suggesting a potential for profit. This fits the strategy of maximizing profit by capitalizing on short-term fluctuations.
+- Stock C has shown a decreasing trend in closing prices over the past 5 days, indicating a potential risk in investing. This highlights the importance of thorough analysis before making investment decisions to align with the strategy of maximizing profit. 
+
+
+Investment strategy in this iteration: try to maximize profit.
+
+--------------------------------------------------------------
+Time:
+- Day: 0
+- Iteration: 1
+
+Stock operation in this iteration: buy 18 shares of stock A at $455.1
+
+Facts in this iteration:
+- Financial Situation:
+    Your total portfolio balance is $38885.76, you are holding the following stocks:
+        - A:
+            - You have held 86 shares of this stock
+            - the total portfolio value is $38885.76 the total capital gain is 1.00% PROFIT
+            - The prices in the past 5 days are: prices: [455.79, 455.79, 439.4, 441.2, 437.8]
+            - current price change: +2.29%, current price: $455.79, cost price: $452.16
+
+- The stocks that avaliable in the market were:
+    
+    - A:
+        - The closing prices in the past 5 days are: [437.53, 439.4, 441.2, 437.8, 455.79]
+        - Dividend per share: $22
+        - Current price change: +2.29%, Current price: $455.79
+        - Intraday High£º$455.79
+        - Intraday Low: $445.6
+        - Intraday Mean: $451.24
+
+    - B:
+        - The closing prices in the past 5 days are: [453.11, 468.12, 470.3, 460.75, 470.43]
+        - Dividend per share: $23
+        - Current price change: +0.99%, Current price: $470.43
+        - Intraday High£º$470.43
+        - Intraday Low: $465.8
+        - Intraday Mean: $467.34
+
+    - C:
+        - The closing prices in the past 5 days are: [498.31, 470.1, 465.25, 455.9, 448.4]
+        - Dividend per share: $25
+        - Current price change: +1.77%, Current price: $448.4
+        - Intraday High£º$448.4
+        - Intraday Low: $440.6
+        - Intraday Mean: $444.6
+
+
+Analysis for stocks:
+- The stock A has shown a consistent increase in closing prices over the past 5 days, with a current price change of +2.29%. This indicates a positive trend in stock A's performance, aligning with the investment strategy to maximize profit.
+- The market index has seen a 1.71% change, suggesting an overall positive market sentiment. This could potentially create a favorable environment for maximizing profits in stock investments.
+- Your existing investment in stock A has resulted in a 1.00% profit, indicating that your strategy of holding onto this stock has been successful. This highlights the importance of monitoring and analyzing stock performance to make informed investment decisions. 
+
+
+Investment strategy in this iteration: try to maximize profit.
+
+--------------------------------------------------------------
+Time:
+- Day: 0
+- Iteration: 2
+
+Stock operation in this iteration: buy 13 shares of stock B at $468.25
+
+Facts in this iteration:
+- Financial Situation:
+    Your total portfolio balance is $47115.12, you are holding the following stocks:
+        - A:
+            - You have held 104 shares of this stock
+            - the total portfolio value is $47115.12 the total capital gain is 1.00% PROFIT
+            - The prices in the past 5 days are: prices: [458.15, 458.15, 439.4, 441.2, 437.8]
+            - current price change: +2.82%, current price: $458.15, cost price: $453.03
+
+- The stocks that avaliable in the market were:
+    
+    - A:
+        - The closing prices in the past 5 days are: [437.53, 439.4, 441.2, 437.8, 458.15]
+        - Dividend per share: $22
+        - Current price change: +2.82%, Current price: $458.15
+        - Intraday High£º$458.15
+        - Intraday Low: $445.6
+        - Intraday Mean: $454.15
+
+    - B:
+        - The closing prices in the past 5 days are: [453.11, 468.12, 470.3, 460.75, 468.25]
+        - Dividend per share: $23
+        - Current price change: +0.53%, Current price: $468.25
+        - Intraday High£º$470.43
+        - Intraday Low: $465.8
+        - Intraday Mean: $468.51
+
+    - C:
+        - The closing prices in the past 5 days are: [498.31, 470.1, 465.25, 455.9, 451.4]
+        - Dividend per share: $25
+        - Current price change: +2.45%, Current price: $451.4
+        - Intraday High£º$451.4
+        - Intraday Low: $440.6
+        - Intraday Mean: $446.54
+
+
+Analysis for stocks:
+- Stock A has shown a consistent increase in closing prices over the past 5 days and has a positive current price change. This indicates a potential upward trend in the stock. As you already hold 104 shares of Stock A, this trend could result in further profits if you decide to hold onto the stock.
+- Market index has shown a 2.02% increase, suggesting an overall positive market sentiment. This could bode well for your existing investments and future investment decisions.
+- Your existing investment in Stock A has resulted in a total capital gain of 1.00%, indicating a profitable position. Considering the positive trend in Stock A and the overall market, it might be wise to hold onto this investment to maximize profit potential. 
+
+Investment strategy in this iteration: try to maximize profit.
+
+--------------------------------------------------------------
+
+Task: 
+- Based on (but is not limit to) the above information, you need to generate gossip only for the above mentioned stocks or the whole market, which will be received by other people and influence their stock operations.
+- The gossip can be real or fake. If you want to make up fake gossip to mislead other people, it cannot be conflicted with the mentioned stock and market information.
