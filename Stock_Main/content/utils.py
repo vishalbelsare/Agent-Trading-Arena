@@ -1,8 +1,3 @@
-# python scripts
-__author__ = "Du Jiawei NUS/IHPC"
-__email__ = "dujiawei@u.nus.edu"
-# Descrption:
-
 # Copy and paste your OpenAI API Key
 openai_api_key = ""
 # Put your name
