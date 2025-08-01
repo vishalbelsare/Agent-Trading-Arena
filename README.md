@@ -7,9 +7,14 @@
 [![Python Version](https://img.shields.io/badge/Python-3.10-blue.svg)]()
 [![GitHub license](https://img.shields.io/badge/MIT-blue)]()
 
-![](docs/images/cradle-intro-cr.png)
+
+![](images/agent arena figure.pdf)
 
 </div>
+
+The Agent Trading Arena is a closed-loop, prior-free human-like trading environment designed to evaluate and advance self-play-capable financial agents.
+
+
 # Preparation
 
 ## Python Install
@@ -24,9 +29,22 @@ Export your OpenAI API key as an environment variable. Replace "your_OpenAI_API_
 cd Stock_Main/content/utils.py
 openai_api_key = "your_OpenAI_API_key"
 ```
+OA_OPENAI_KEY is the OpenAI API key. You can get it from the [OpenAI](https://platform.openai.com/api-keys).
+
 # Experiment
 
 ## Run the code
 ```
 python main.py
+```
+
+# Citation
+If you find our work useful, please consider citing us!
+```
+@misc{ma2025llmknowsgeometrybetter,
+      title={LLM Knows Geometry Better than Algebra: Numerical Understanding of LLM-Based Agents in A Trading Arena}, 
+      author={Tianmi Ma and Jiawei Du and Wenxin Huang and Wenjie Wang and Liang Xie and Xian Zhong and Joey Tianyi Zhou},
+      year={2025},
+      journal={arXiv preprint arXiv: 2502.17967},
+}
 ```
