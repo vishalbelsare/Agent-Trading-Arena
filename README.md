@@ -8,7 +8,7 @@
 [![GitHub license](https://img.shields.io/badge/MIT-blue)]()
 
 
-![](images/Agent Trading Arena.png)
+![](images/Agent_Trading_Arena.png)
 
 </div>
 
