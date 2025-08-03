@@ -9,7 +9,7 @@ from content.our_run_gpt_prompt import (
     update_strategy,
     run_gpt_generate_gossip,
 )
-from constant import analysis_num, gossip_num_max
+#from constant import analysis_num, gossip_num_max
 
 
 def extract_for_choose_buy(choose_buy):
@@ -79,13 +79,13 @@ def extract_strategy(new_strategy):
         return False
 
 
-def stock_ops(virtual_date, persons, stocks, market_index, iter):
+def stock_ops(virtual_date, persons, stocks, market_index, iter, args):
     # obtain the stock operations
     ops = []
     for p in persons:
         if p.person_id > -1:
             analysis_results, gossip = analysis(
-                virtual_date, p, stocks, market_index, analysis_num, gossip_num_max
+                virtual_date, p, stocks, market_index, args.analysis_num, args.gossip_num_max
             )
            # print(analysis_results,gossip)
             # p.analysis = analysis_results

@@ -4,7 +4,6 @@ import os
 import pickle
 import shutil
 from database_utils import query_all_stocks, Database_operate
-from constant import persona_path, Num_Person, Num_Stock, Save_Path
 
 
 def load_persona(json_path):
@@ -23,7 +22,7 @@ def load_stocks(json_path):
     return stocks
 
 
-def save_class(name, obj):
+def save_class(name, obj, Save_Path):
     class_save_path = osp.join(Save_Path, "classes")
     if not os.path.exists(class_save_path):
         os.makedirs(class_save_path)
@@ -35,25 +34,25 @@ def save_class(name, obj):
     output.close()
 
 
-def load_class(name):
-    class_save_path = osp.join(Save_Path, "classes")
+def load_class(name, args):
+    class_save_path = osp.join(args.Save_Path, "classes")
     save_file = osp.join(class_save_path, name+".pkl")
     with open(save_file, "rb") as file:
         obj = pickle.loads(file.read())
     return obj
 
 
-def save_all(virtual_date, iteration, stocks, market_index, persons, market):
+def save_all(virtual_date, iteration, stocks, market_index, persons, market, args):
     infor_dic = {"virtual_date": virtual_date, "iteration": iteration}
     infor_json = json.dumps(infor_dic, indent=4)
-    with open(osp.join(Save_Path, "information.json"), "w") as file:
+    with open(osp.join(args.Save_Path, "information.json"), "w") as file:
         file.write(infor_json)
     database = market.db
 
     for index, each in enumerate(stocks):
         each.db = None
         save_name = "STOCK_{}".format(index)
-        save_class(save_name, each)
+        save_class(save_name, each, args.Save_Path)
 
     persons[-1].db = None
     for index, each in enumerate(persons):
@@ -79,27 +78,27 @@ def save_all(virtual_date, iteration, stocks, market_index, persons, market):
 
 
 
-def load_all():
-    database = Database_operate(osp.join(Save_Path, "data"))
-    with open(osp.join(Save_Path, "information.json"), 'r') as file:
+def load_all(args):
+    database = Database_operate(osp.join(args.Save_Path, "data"))
+    with open(osp.join(args.Save_Path, "information.json"), 'r') as file:
         infor_dic = json.load(file)
     current_date = infor_dic["virtual_date"]
-    current_iteration = infor_dic["iteration"]
+    current_iteration = infor_dic["iteration"]#
 
     stocks = []
-    for index in range(Num_Stock):
+    for index in range(args.Num_Stock):
         save_name = "STOCK_{}".format(index)
-        obj = load_class(save_name)
+        obj = load_class(save_name, args)
         obj.db = database
         stocks.append(obj)
 
-    save_name = "PERSON_{}".format(Num_Person)
+    save_name = "PERSON_{}".format(args.Num_Person)
     broker = load_class(save_name)
     broker.stocks = stocks
     broker.db = database
 
     persons = []
-    for index in range(Num_Person):
+    for index in range(args.Num_Person):
         save_name = "PERSON_{}".format(index)
         obj = load_class(save_name)
         obj.db = database

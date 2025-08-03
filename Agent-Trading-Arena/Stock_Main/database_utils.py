@@ -1,12 +1,13 @@
 import sqlite3
 import time
-from constant import current_milli_time
 import matplotlib.pyplot as plt
 import base64
 import numpy as np
 import mplfinance as mpf
 import pandas as pd
-from constant import Num_Stock, STOCK_NAME
+
+
+current_milli_time = lambda: int(round(time.time() * 1000))
 
 def parse_gossip(gossip):
     return_lists = []
@@ -199,19 +200,19 @@ def stock_(stock_id, start_date=-9, end_date=0):
     results = results.drop(columns=['stock_id', 'weekday', 'quantity','virtual_date'])
     return results
 
-def save_plot_stocks(virtual_date):
-    for i in range(Num_Stock):
-        stock_A=stock_(i, start_date=-9, end_date=virtual_date)
-        #stock_B=stock_(1, start_date=-9, end_date=virtual_date)
+#def save_plot_stocks(virtual_date):
+#    for i in range(Num_Stock):
+#        stock_A=stock_(i, start_date=-9, end_date=virtual_date)
+#        #stock_B=stock_(1, start_date=-9, end_date=virtual_date)
         #stock_C=stock_(2, start_date=-9, end_date=virtual_date)
-        virtual_dates=[i-9 for i in range(len(stock_A))]
-        fig, axes =mpf.plot(stock_A, type='candle', style='charles', title='Daily K-line chart of stock {}'.format(STOCK_NAME[i]), ylabel='Price',returnfig=True)
-        axes[0].set_xticks(range(len(virtual_dates)))  # 
-        axes[0].set_xticklabels(virtual_dates)
+#        virtual_dates=[i-9 for i in range(len(stock_A))]
+#        fig, axes =mpf.plot(stock_A, type='candle', style='charles', title='Daily K-line chart of stock {}'.format(STOCK_NAME[i]), ylabel='Price',returnfig=True)
+#        axes[0].set_xticks(range(len(virtual_dates)))  # 
+#        axes[0].set_xticklabels(virtual_dates)
         #plt.savefig('stock_{}_price.pdf'.format(STOCK_NAME[i]))
         #plt.close(fig)  #
-        plt.savefig('stock_{}_price.jpg'.format(STOCK_NAME[i]), dpi=500)
-        plt.close(fig)
+#        plt.savefig('stock_{}_price.jpg'.format(STOCK_NAME[i]), dpi=500)
+#        plt.close(fig)
 
 def trans_url(photo_path):
     with open(photo_path, 'rb') as image_file:  

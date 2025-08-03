@@ -11,7 +11,7 @@ from database_utils import (
     round_two_decimal,
 )
 from load_json import load_persona
-from constant import expense_ratio, STOCK_NAMES
+from constant import STOCK_NAMES
 from content.our_run_gpt_prompt import integrate_hold_info, integrate_stock_info
 
 
@@ -361,7 +361,7 @@ class Person:
         )
         self.db.execute_sql(cmd)
 
-    def end_of_day(self, virtual_date):
+    def end_of_day(self, virtual_date, args):
         # update the personal status after a day trading
         all_stocks = query_all_stocks(self.db, virtual_date)
         hold_stocks = self.query_hold_stocks(virtual_date)
@@ -408,7 +408,7 @@ class Person:
         self.asset = total_asset
         self.daily_expense = (
             total_asset * 1.0 + self.cash
-        ) * expense_ratio + self.minimum_living_expense
+        ) * args.expense_ratio + self.minimum_living_expense
         self.cash -= self.daily_expense
         self.wealth = self.asset + self.cash
         self.broker.count_expense(self.daily_expense)
@@ -472,7 +472,7 @@ class Person:
                     "for {duration} days with portfolio value ${balance:.2f} and {statement} in {profit:.2f}% "
                     "from this investment;"
                 ).format(
-                    name=STOCK_NAMES[stock_id],
+                    name=args.STOCK_NAMES[stock_id],
                     quantity=each_hold_stock["quantity"],
                     cost_price=each_hold_stock["cost_price"],
                     duration=virtual_date - each_hold_stock["start_date"],

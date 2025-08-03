@@ -6,7 +6,7 @@ import time
 
 from database_utils import Database_operate, parse_orders
 from Stock import Stock
-from constant import Daily_Price_Limit, Fluctuation_Constant
+#from constant import Daily_Price_Limit, Fluctuation_Constant
 
 
 class Market:
@@ -27,7 +27,7 @@ class Market:
             )
             self.db.execute_sql(cmd)
 
-    def end_of_market(self, virtual_date):
+    def end_of_market(self, virtual_date, args):
         # put all the rest active order traded by the broker.
         all_orders = self._fetch_orders("all", -1)  # fetch all active orders
        # print("end_of_market all_orders:",all_orders)
@@ -43,7 +43,7 @@ class Market:
             # check if we should skip this order
             if (
                 abs(deal_price - cur_stock_price) / cur_stock_price
-            ) > Daily_Price_Limit:#constant:0.7
+            ) > args.Daily_Price_Limit:#constant:0.7
                 continue
             if (
                 self.broker.inventories[stock_id] <= 0
@@ -62,9 +62,9 @@ class Market:
 
             # update the prices of stocks
             self.stocks[stock_id].current_price = (
-                deal_price * trade_quantity * Fluctuation_Constant
+                deal_price * trade_quantity * args.Fluctuation_Constant
                 + cur_stock_price * total_quantity
-            ) / (trade_quantity * Fluctuation_Constant + total_quantity)
+            ) / (trade_quantity * args.Fluctuation_Constant + total_quantity)
 
             cur_stock_price = self.stocks[stock_id].current_price
             deal_price = cur_stock_price
@@ -93,7 +93,7 @@ class Market:
             
             self.broker.settlement(order, deal_price, trade_quantity)
 
-    def match_order(self, today):
+    def match_order(self, today, args):
         for stock_iter in range(len(self.stocks)):
             buy_orders = self._fetch_orders("buy", stock_iter)
             sell_orders = self._fetch_orders("sell", stock_iter)
@@ -112,7 +112,7 @@ class Market:
                 deal_price = (current_buy["price"] + current_sell["price"]) / 2
                 if (
                     abs(deal_price - cur_stock_price) / cur_stock_price
-                ) > Daily_Price_Limit:
+                ) > args.Daily_Price_Limit:
                     # close this round of matching, update orders
                     break
 
@@ -122,9 +122,9 @@ class Market:
                 )
                
                 self.stocks[stock_iter].current_price = (
-                    deal_price * trade_quantity * Fluctuation_Constant #20.0
+                    deal_price * trade_quantity * args.Fluctuation_Constant #20.0
                     + cur_stock_price * total_quantity
-                ) / (trade_quantity * Fluctuation_Constant + total_quantity)
+                ) / (trade_quantity * args.Fluctuation_Constant + total_quantity)
                 cur_stock_price = self.stocks[stock_iter].current_price
                 self.stocks[stock_iter].update_trade_data(
                     today, cur_stock_price, trade_quantity

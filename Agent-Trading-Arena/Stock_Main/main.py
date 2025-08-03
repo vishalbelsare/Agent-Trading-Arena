@@ -1,140 +1,54 @@
-
-import datetime
-import pickle
-import sqlite3
-import json
-import time
+import argparse
+import os
 import os.path as osp
+import random
+import time
+import json
+
 from database_utils import query_all_stocks, Database_operate
 from Person import Person, Broker
 from Stock import Stock, Market_index
 from Market import Market
 from behavior import stock_ops, reflection, generate_gossip
-from constant import persona_path, stock_path, Iterations_Daily, No_Days, Save_Path, Num_Person, Num_Stock
 from load_json import save_all, load_all
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
 
 
-def sort():
-    myDict = {"ravi": 10, "rajnish": 9, "sanjeev": 15, "yash": 2, "suraj": 32}
+def get_args():
+    parser = argparse.ArgumentParser(description='[Stock Simulation] Market Environment Settings')
 
-    myKeys = list(myDict.keys())
-    myKeys.sort()
-    sorted_dict = {i: myDict[i] for i in myKeys}
-    # print(sorted_dict)
+    parser.add_argument('--Iterations_Daily', type=int, default=3, help='number of iterations per day')
+    parser.add_argument('--No_Days', type=int, default=3, help='number of trading days')
+    parser.add_argument('--Num_Person', type=int, default=9, help='number of agents')
+    parser.add_argument('--Num_Stock', type=int, default=3, help='number of stocks')
+    parser.add_argument('--SAVE_NAME', type=str, default='sim01', help='name of save folder')
+    parser.add_argument('--STOCK_NAMES', type=str, nargs='+', default=["0", "1", "2", "3", "4"],
+                    help='list of stock names (e.g., 0 1 2 3 4)')
 
+    parser.add_argument('--persona_name', type=str, default='persona.json', help='filename for personas')
+    parser.add_argument('--stock_name', type=str, default='stocks.json', help='filename for stocks')
 
-def db_operate():
-    conn = sqlite3.connect("test.db")
-    cur = conn.cursor()
-    cmd_create_table = "Create Table active_bids (timetag Integer, virtual_time text, stock_id INTEGER, type text check(type IN ('sell','buy')), price float)"
-    cur.execute(cmd_create_table)
-    cmd_insert = "Insert Into active_bids values({},'{}',{},'{}',{})".format(
-        101, "vir", 1, "buy", 36.87
-    )
-    cur.execute(cmd_insert)
-    conn.commit()
-    conn.close()
+    parser.add_argument('--Daily_Price_Limit', type=float, default=0.7, help='daily price change limit')
+    parser.add_argument('--expense_ratio', type=float, default=0.03, help='capital cost rate')
+    parser.add_argument('--Fluctuation_Constant', type=float, default=20.0, help='price fluctuation constant')
+    parser.add_argument('--verbose', action='store_true', help='print debug information')
 
+    parser.add_argument('--analysis_num', type=int, default=3, help='number of agents performing analysis')
+    parser.add_argument('--gossip_num_max', type=int, default=3, help='maximum number of gossip entries per round')
 
-def save_json():
-    to_save = {1: 10, 2: 34, 3: 23}
-    json.dumps(to_save)
+    args = parser.parse_args()
 
+    # Derived paths
+    args.Save_Path = osp.join("./save", args.SAVE_NAME)
+    if not os.path.exists(args.Save_Path):
+        os.makedirs(args.Save_Path)
 
-def parse_data(order):
-    # timestamp int, virtual_time text, weekday int, stock_id int, person_id int, type text, price float
-    name_tags = [
-        "timestamp",
-        "virtual_time",
-        "weekday",
-        "stock_id",
-        "person_id",
-        "type",
-        "price",
-    ]
-    return_dic = {}
-    for index, name in enumerate(name_tags):
-        return_dic[name] = order[index]
-    # print(return_dic)
-    return return_dic
+    args.persona_path = osp.join(args.Save_Path, args.persona_name)
+    args.stock_path = osp.join(args.Save_Path, args.stock_name)
+
+    return args
 
 
-def data_parse(inputs):
-    for each in inputs:
-        parse_data(each)
-
-
-def db_op2():
-    conn = sqlite3.connect("Simu0.db")
-    cur = conn.cursor()
-    cmd = (
-        "SELECT  * from (select * from active_orders where stock_id=3 order by price,timestamp) union all "
-        "SELECT  * from (select * from active_orders where stock_id=2 order by price,timestamp)"
-    )
-    # cmd = "SELECT  * from (select * from active_orders where stock_id=1 order by price,timestamp)"
-    # cmd = "select * from stock order by price"
-    cur.execute(cmd)
-    results = cur.fetchall()
-    for each in results:
-        print(each)
-    conn.commit()
-    conn.close()
-
-
-def round_two_decimal(input):
-    try:
-        res = float("{:.2f}".format(input))
-        return res
-    except Exception:
-        return input
-
-
-def db_op3():
-    dic = {"a": 1, "b": 3, "c": 3}
-    for count, (key, value) in enumerate(dic.items()):
-        print(count, key, value)
-
-
-def time_test():
-
-    """
-    gpt_response = "Operation: buy, Stock name: C, Investment Amount: $100.00, Best Buying Price: $490.6"
-    gpt_response = "Operation: sell, Stock name: B,The number of shares: 32, Best Selling Price: 474.84"
-    gpt_response = "Operation: buy, Stock name: C, Investment Amount: 10000, Best Buying Price: $493.5"
-    gpt_response = "Operation: buy, Stock name: C, Investment Amount: $15840.0, Best Buying Price: $491.57"
-    match = re.search(r"^\s*Operation:\s*buy,\s*Stock name:\s*([A-Z]),\s*Investment Amount:\s*\$?(\d+(\.\d+)?),\s*Best Buying Price:\s*\$?(\d+(\.\d+)?)\s*$", gpt_response)
-    print(match.group(0))
-    print(match.group(1))
-    print(match.group(2))
-    print(match.group(3))
-    print(match.group(4))
-    print(match.group(5))
-    """
-
-
-def pickle_test():
-    import pickle
-
-    database = Database_operate("Simu0")
-    stk = Stock(0, database, stock_path)
-    stk.db = None
-    stk.current_price = 1000
-    output = open("1.pkl", "wb")
-    strs = pickle.dumps(stk)
-    output.write(strs)
-    output.close()
-
-
-def pickle_load():
-    database = Database_operate("Simu0")
-    with open("1.pkl", "rb") as file:
-        stk = pickle.loads(file.read())
-    print(stk.current_price)
-
-
-def init_all(load=False):
+def init_all(args, load=False):
     if load:
         (
             current_date,
@@ -144,44 +58,30 @@ def init_all(load=False):
             market,
             stocks,
             persons,
-        ) = load_all()
+        ) = load_all(args)
     else:
-        # initialize all objects
-        database = Database_operate(osp.join(Save_Path, "data"))
+        database = Database_operate(osp.join(args.Save_Path, "data"))
 
-        # clear tables
-        cmd = "drop table if exists active_orders"
-        database.execute_sql(cmd)
-        cmd = "drop table if exists stock"
-        database.execute_sql(cmd)
-        cmd = "drop table if exists person"
-        database.execute_sql(cmd)
-        cmd = "drop table if exists account"
-        database.execute_sql(cmd)
-        cmd = "drop table if exists memory"
-        database.execute_sql(cmd)
-        cmd = "drop table if exists gossip"
-        database.execute_sql(cmd)
+        # Clear existing tables
+        for table in ["active_orders", "stock", "person", "account", "memory", "gossip"]:
+            cmd = f"drop table if exists {table}"
+            database.execute_sql(cmd)
 
         database.init_database()
 
-        stocks = []
-        persons = []
-
-        for i in range(Num_Stock):
-            stocks.append(Stock(i, database, stock_path))
+        stocks = [Stock(i, database, args.stock_path) for i in range(args.Num_Stock)]
         market_index = Market_index(stocks, database)
         broker = Broker(stocks, database)
 
-        for i in range(Num_Person):
-            persons.append(Person(i, broker, stocks, database, persona_path))
+        persons = [Person(i, broker, stocks, database, args.persona_path) for i in range(args.Num_Person)]
         persons.append(broker)
+
         market = Market(broker, persons, stocks, database)
 
     return 0, 0, broker, market_index, market, stocks, persons
 
 
-def overall_test():
+def overall_test(args):
     (
         current_date,
         current_iteration,
@@ -190,43 +90,43 @@ def overall_test():
         market,
         stocks,
         persons,
-    ) = init_all(False)
-    for virtual_date in range(No_Days):
+    ) = init_all(args, load=False)
+
+    for virtual_date in range(args.No_Days):
         if virtual_date == 0:
             broker.ipo(virtual_date)
+
         market_index.update_market_index(virtual_date)
         generate_gossip(virtual_date, persons, stocks)
-        for iter in range(Iterations_Daily):
-            ops = stock_ops(virtual_date, persons, stocks, market_index, iter)
-            rand = random.sample(range(0,Num_Person),Num_Person)
+
+        for iter in range(args.Iterations_Daily):
+            ops = stock_ops(virtual_date, persons, stocks, market_index, iter, args)
+            rand = random.sample(range(0, args.Num_Person), args.Num_Person)
             for i in rand:
                 for j in range(2): 
                     op = ops[i][j]
                     persons[i].create_order(i, op, virtual_date, iter)
-            market.match_order(virtual_date) 
-            market.end_of_market(virtual_date)
+
+            market.match_order(virtual_date, args)
+            market.end_of_market(virtual_date, args)
             market_index.update_market_index(virtual_date)
+
             for each_person in persons:
                 if each_person.person_id >= 0:
                     each_person.end_of_iteration(virtual_date, iter)
 
-
             reflection(virtual_date, persons, stocks, market_index, iter)
-            save_all(virtual_date, iter, stocks, market_index, persons, market)
+            save_all(virtual_date, iter, stocks, market_index, persons, market, args)
 
-        # end of a trading day
+        # End of the trading day
         market.end_of_day(virtual_date)
         for each_person in persons:
-            each_person.end_of_day(virtual_date)
+            each_person.end_of_day(virtual_date, args)
         for each_stock in stocks:
             each_stock.end_of_day(virtual_date)
         market_index.end_of_day(virtual_date)
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == "__main__":
-    overall_test()
-    # time_test()
-    # db_op3()
-    # pickle_test()
-    # pickle_load()
+    args = get_args()
+    overall_test(args)
