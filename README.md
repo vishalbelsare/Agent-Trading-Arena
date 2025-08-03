@@ -35,7 +35,8 @@ OA_OPENAI_KEY is the OpenAI API key. You can get it from the [OpenAI](https://pl
 
 ## Run the code
 ```
-python main.py
+cd Agent-Trading-Arena
+sh run.sh
 ```
 
 # Citation
