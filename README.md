@@ -1,4 +1,4 @@
-# LLM Knows Geometry Better than Algebra: Numerical Understanding of LLM-Based Agents in A Trading Arena
+# Agent Trading Arena: A Study on Numerical Understanding in LLM-Based Agents
 <div align="center">
 
 [[arXiv]](https://arxiv.org/abs/2502.17967)
@@ -42,8 +42,8 @@ sh run.sh
 # Citation
 If you find our work useful, please consider citing us!
 ```
-@misc{ma2025llmknowsgeometrybetter,
-      title={LLM Knows Geometry Better than Algebra: Numerical Understanding of LLM-Based Agents in A Trading Arena}, 
+@misc{ma2025agenttradingarena,
+      title={Agent Trading Arena: A Study on Numerical Understanding in LLM-Based Agents}, 
       author={Tianmi Ma and Jiawei Du and Wenxin Huang and Wenjie Wang and Liang Xie and Xian Zhong and Joey Tianyi Zhou},
       year={2025},
       journal={arXiv preprint arXiv: 2502.17967},
